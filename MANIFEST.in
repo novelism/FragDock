@@ -1,0 +1,4 @@
+include README.md LICENSE
+recursive-include data *.pkl *.csv *.py
+recursive-include examples *
+recursive-include scripts *
