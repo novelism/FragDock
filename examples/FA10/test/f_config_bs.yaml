@@ -1,11 +1,11 @@
 # =========================================================
 # FragDockRL configuration file
-# All parameters controlling search, and docking
+# All parameters controlling RL training, docking, and search
 # =========================================================
 
 run:
   start_smi: "OC(=O)c1ccc(Cl)s1"        # Starting molecule (SMILES) used as the initial state
-  num_sub_proc: 1                # Number of subprocesses used for parallel docking / evaluation
+  num_sub_proc: 32               # Number of subprocesses used for parallel docking / evaluation
   ep_dir: "ep"                   # Directory where generated episode data are stored
   save_dir: "save"               # Directory where trained models and checkpoints are saved
   device: "auto"                 # Compute device: auto / cpu / cuda / cuda:0
@@ -17,12 +17,13 @@ data:
   building_block_file: "bb_reaction.pkl"  # Building block and reaction mapping data
   reaction_file: "smirks_reactant.pkl"    # Reaction definitions (SMIRKS)
   m_bb_file: "m_bb.pkl"          # Precomputed building block metadata
+  bb_fp_pkl: "bb_fp_r2_1024.pkl" # Building block fingerprints (used as features)
 
 search:
   penalty_score: -2.0            # Score penalty applied when constraints are violated
   max_step: 3                    # Number of sequential assembly steps (tree depth)
-  max_search: 20000              # total number of molecules to generate
-  save_freq: 200                 # save results every N molecules
+  num_expand: 6666               # Max number of successful BB expansions per node (docking budget per node)
+  beam_width: 10                 # Number of top molecules kept at each step
 
 docking:
   tdock: "rdock"                 # Docking engine (rdock or smina)

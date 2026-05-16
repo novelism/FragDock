@@ -1,6 +1,6 @@
 # FragDock
 
-FragDock is a framework for fragment-based ligand design using building block assembly and tethered docking.
+FragDock is a framework for fragment-based ligand design using building block assembly and tethered docking.  
 It provides multiple search methods, including reinforcement learning and baseline search algorithms, within the same molecular assembly and docking workflow.
 
 **Associated manuscript:**  
@@ -26,55 +26,29 @@ The framework includes the following search methods:
 
 ## Installation
 
-### 1. Clone the repository
+Clone the repository:
 
 ```bash
-git clone https://github.com/<your-repo>/FragDock.git
+git clone https://github.com/novelism/FragDock.git
 cd FragDock
 ```
 
----
-
-### 2. Create the conda environment
-
-Create the base environment:
+Create the conda environment:
 
 ```bash
 conda env create -f environment.yml
 conda activate fragdock
 ```
 
-This installs core dependencies such as RDKit, pandas, and docking tools.
-
----
-
-### 3. Install PyTorch separately
-
-PyTorch is **not included** in `environment.yml` because installation depends on your system, such as CPU/GPU setup and CUDA version.
-
-The following commands are tested with PyTorch 2.10.0.
-
-#### CPU-only
-
-```bash
-pip3 install torch==2.10.0 torchvision --index-url https://download.pytorch.org/whl/cpu
-```
-
-#### NVIDIA GPU, CUDA 12.8 example
-
-```bash
-pip3 install torch==2.10.0 torchvision --index-url https://download.pytorch.org/whl/cu128
-```
-
-If your system uses a different CUDA version, refer to the official PyTorch installation guide:
+Install PyTorch separately according to your CPU/GPU setup and CUDA version:
 
 ```text
 https://pytorch.org/get-started/locally/
 ```
 
----
+The code has been tested with PyTorch 2.10.0.
 
-### 4. Install FragDock
+Install FragDock:
 
 ```bash
 pip install .
@@ -88,101 +62,77 @@ pip install -e .
 
 ---
 
-### 5. Additional dependencies
-
-If AutoDockTools for Python 3 is not already installed:
-
-```bash
-pip install git+https://github.com/Valdes-Tresanco-MS/AutoDockTools_py3.git
-```
-
----
-
-## Usage
-
-After installation, the following command-line scripts are available:
-
-```bash
-prepare_core.py
-run_fragdock_rl.py
-run_fragdock_random.py
-run_fragdock_bs.py
-run_fragdock_mcts.py
-run_fragdock_1step.py
-run_tdock.py
-```
-
-Each search method is controlled by a YAML configuration file in `configs/`.
-
-```text
-configs/
-├── f_config_rl.yaml
-├── f_config_random.yaml
-├── f_config_bs.yaml
-├── f_config_mcts.yaml
-└── f_config_1step.yaml
-```
-
-Typical usage:
-
-```bash
-run_fragdock_rl.py -c configs/f_config_rl.yaml
-run_fragdock_random.py -c configs/f_config_random.yaml
-run_fragdock_bs.py -c configs/f_config_bs.yaml
-run_fragdock_mcts.py -c configs/f_config_mcts.yaml
-run_fragdock_1step.py -c configs/f_config_1step.yaml
-```
-
-To run tethered docking for a prepared ligand/receptor setup, use:
-
-```bash
-run_tdock.py <config.yaml>
-```
-
----
-
-## Data preparation
+## Data Preparation
 
 Building block and reaction input files should be prepared before running FragDock.
-
-See:
-
-```text
-data/README.md
-```
-
-for information on building block files, reaction templates, and preprocessing.
 
 The repository includes template and reaction files such as:
 
 ```text
 data/building_blocks_template.csv
 data/smirks.csv
+data/smirks_reactant.csv
 ```
+
+The actual `building_blocks.csv` file is not distributed with this repository.  
+See `data/README.md` for details.
+
+---
+
+## Preparing the Reference Core
+
+FragDock requires a reference core PDB file for tethered docking.  
+A core PDB file can be extracted from a reference ligand structure using `prepare_core.py`.
+
+```bash
+prepare_core.py "CORE_SMILES" reference_ligand.pdb -c mol_ref_core.pdb
+```
+
+Use `prepare_core.py -h` for detailed options.
+
+---
+
+## Docking Setup
+
+FragDock requires target-specific docking setup files for rDock and/or smina.  
+Because these settings depend on the protein target and reference ligand, detailed setup instructions will be provided with example cases in the `examples/` directory.
 
 ---
 
 ## Configuration
 
-Main configuration sections include:
+Template configuration files are provided in the `configs/` directory.
 
-```text
-run
- data
- search
- docking
- cutoff
- penalty
+| Method | Configuration template |
+|---|---|
+| FragDockRL | `configs/f_config_rl.yaml` |
+| One-step search | `configs/f_config_1step.yaml` |
+| Random search | `configs/f_config_random.yaml` |
+| Beam search | `configs/f_config_bs.yaml` |
+| MCTS | `configs/f_config_mcts.yaml` |
+
+Copy the appropriate template file and edit it for your target system.  
+See `configs/README.md` for details.
+
+---
+
+## Running FragDock
+
+FragDock provides separate command-line scripts for each search method.
+
+```bash
+run_fragdock_rl.py -c configs/f_config_rl.yaml
+run_fragdock_1step.py -c configs/f_config_1step.yaml
+run_fragdock_random.py -c configs/f_config_random.yaml
+run_fragdock_bs.py -c configs/f_config_bs.yaml
+run_fragdock_mcts.py -c configs/f_config_mcts.yaml
 ```
 
-The reinforcement learning configuration additionally includes:
+---
 
-```text
-model
-training
-```
+## Output Files
 
-In `f_config_rl.yaml`, `search.max_step` indicates the maximum number of building block selections before forced termination.
+Generated molecules, docking results, episode records, and log files are written to the output directory specified in the configuration file.
 
 ---
 
@@ -196,14 +146,12 @@ Tested environment:
 
 Additional notes:
 
-- Other PyTorch versions may work but are not officially validated.
-- `smina` is installed via conda and is required for smina-based docking.
-- rDock is required for rDock-based tethered docking.
-- PyTorch must be installed separately depending on CPU/GPU setup.
+- PyTorch must be installed separately depending on the CPU/GPU setup.
+- rDock and/or smina input files must be prepared separately for each target system.
 
 ---
 
 ## License
 
-Licensed under a Custom Non-Commercial License.
+Licensed under a Custom Non-Commercial License.  
 Commercial use requires permission.

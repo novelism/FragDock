@@ -1,10 +1,10 @@
 # =========================================================
-# FragDock Random Search configuration file
+# FragDockRL configuration file
 # All parameters controlling search, and docking
 # =========================================================
 
 run:
-  start_smi: "NCc1ccncc1"        # Starting molecule (SMILES) used as the initial state
+  start_smi: "OC(=O)c1ccc(Cl)s1"        # Starting molecule (SMILES) used as the initial state
   num_sub_proc: 32               # Number of subprocesses used for parallel docking / evaluation
   ep_dir: "ep"                   # Directory where generated episode data are stored
   save_dir: "save"               # Directory where trained models and checkpoints are saved
@@ -22,7 +22,7 @@ data:
 
 search:
   penalty_score: -2.0            # Score penalty applied when constraints are violated
-  max_step: 4                    # Maximum number of synthesis steps in an episode
+  max_step: 3                    # Maximum number of BB selections
   num_ep_batch: 20000            # Number of episodes generated per batch
 
 docking:

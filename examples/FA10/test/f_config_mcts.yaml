@@ -1,6 +1,6 @@
 # =========================================================
 # FragDockRL configuration file
-# All parameters controlling search, and docking
+# All parameters controlling RL training, docking, and search
 # =========================================================
 
 run:

@@ -1,0 +1,7 @@
+receptor=../pdb/2VWMA_receptor.pdbqt
+center_x=1.397
+center_y=-8.932
+center_z=-13.814
+size_x=21.495
+size_y=22.812
+size_z=26.259
