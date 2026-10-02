@@ -1,11 +1,13 @@
 # FragDock
+Current public version: **v0.5**
 
 FragDock is a framework for fragment-based ligand design using building block assembly and tethered docking.  
 It provides multiple search methods, including reinforcement learning and baseline search algorithms, within the same molecular assembly and docking workflow.
 
 **Associated manuscript:**  
 **FragDockRL: A Reinforcement Learning Method for Fragment-Based Ligand Design via Building Block Assembly and Tethered Docking**  
-Seung Hwan Hong et al.  
+Seung Hwan Hong et al. 
+Accepted for publication in *Journal of Chemical Information and Modeling*.  
 Preprint available on bioRxiv.
 
 ---
@@ -94,7 +96,7 @@ Use `prepare_core.py -h` for detailed options.
 
 ## Docking Setup
 
-FragDock requires target-specific docking setup files for rDock and/or smina.  
+FragDock requires target-specific docking setup files for rDock and SMINA.
 Because these settings depend on the protein target and reference ligand, detailed setup instructions will be provided with example cases in the `examples/` directory.
 
 ---
@@ -132,8 +134,7 @@ run_fragdock_mcts.py -c configs/f_config_mcts.yaml
 
 ## Output Files
 
-Generated molecules, docking results, episode records, and log files are written to the output directory specified in the configuration file.
-
+Generated molecules, docking results, episode records, training logs, and method-specific result files are written to the output paths specified in the configuration file.
 ---
 
 ## Notes
@@ -154,4 +155,10 @@ Additional notes:
 ## License
 
 Licensed under a Custom Non-Commercial License.  
-Commercial use requires permission.
+Academic and non-commercial use is permitted under the terms of the license.  
+Commercial use requires prior permission from the author.
+
+For commercial licensing inquiries, contact:  
+Seung Hwan Hong  
+shhong@novelismlab.com
+
