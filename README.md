@@ -4,9 +4,10 @@ Current public version: **v0.5**
 
 FragDock is a molecular design framework that explores synthetically accessible chemical space by assembling molecules from building blocks through predefined reaction templates and evaluating them using tethered docking.
 
-## Citation
+## Related Papers
 
-If you use FragDock in your research, please cite:
+For details of the FragDock framework and FragDockRL method, please refer to the following paper.  
+If you use FragDock in your research, please cite this work:
 
 **FragDockRL: A Reinforcement Learning Method for Fragment-Based Ligand Design via Building-Block Assembly and Tethered Docking**  
 Seung Hwan Hong et al.  
