@@ -1,14 +1,17 @@
+
 # FragDock
 Current public version: **v0.5**
 
-FragDock is a framework for fragment-based ligand design using building block assembly and tethered docking.  
-It provides multiple search methods, including reinforcement learning and baseline search algorithms, within the same molecular assembly and docking workflow.
+FragDock is a molecular design framework that explores synthetically accessible chemical space by assembling molecules from building blocks through predefined reaction templates and evaluating them using tethered docking.
 
-**Associated manuscript:**  
-**FragDockRL: A Reinforcement Learning Method for Fragment-Based Ligand Design via Building Block Assembly and Tethered Docking**  
-Seung Hwan Hong et al. 
-Accepted for publication in *Journal of Chemical Information and Modeling*.  
-Preprint available on bioRxiv.
+## Citation
+
+If you use FragDock in your research, please cite:
+
+**FragDockRL: A Reinforcement Learning Method for Fragment-Based Ligand Design via Building-Block Assembly and Tethered Docking**  
+Seung Hwan Hong et al.  
+*Journal of Chemical Information and Modeling*  
+https://doi.org/10.1021/acs.jcim.6c02851
 
 ---
 
@@ -135,6 +138,7 @@ run_fragdock_mcts.py -c configs/f_config_mcts.yaml
 ## Output Files
 
 Generated molecules, docking results, episode records, training logs, and method-specific result files are written to the output paths specified in the configuration file.
+
 ---
 
 ## Notes
@@ -148,7 +152,33 @@ Tested environment:
 Additional notes:
 
 - PyTorch must be installed separately depending on the CPU/GPU setup.
-- rDock and/or smina input files must be prepared separately for each target system.
+- rDock and SMINA input files must be prepared separately for each target system.
+
+---
+
+## Research Collaboration and Feedback
+
+We are looking for research partners interested in applying FragDock to real-world drug discovery projects.
+
+Potential collaborations may include:
+- target-specific virtual screening
+- fragment or hit expansion
+- structure-guided molecular design
+- experimental validation of FragDock-generated candidates
+- development and evaluation of new FragDock workflows
+
+We also welcome feedback and suggestions for improving FragDock, including:
+- new features or workflow ideas
+- support for additional reaction types
+- docking or scoring improvements
+- usability and documentation improvements
+- bug reports and reproducibility issues
+
+For research collaboration inquiries, contact:  
+Seung Hwan Hong  
+shhong@novelismlab.com
+
+For bug reports and feature suggestions, please use GitHub Issues.
 
 ---
 
