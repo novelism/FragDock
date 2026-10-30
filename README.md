@@ -11,7 +11,7 @@ If you use FragDock in your research, please cite this work:
 
 **FragDockRL: A Reinforcement Learning Method for Fragment-Based Ligand Design via Building-Block Assembly and Tethered Docking**  
 Seung Hwan Hong et al.  
-*Journal of Chemical Information and Modeling*  
+*Journal of Chemical Information and Modeling* **2026**, *66* (20), 13339–13356.  
 https://doi.org/10.1021/acs.jcim.6c02851
 
 ---
